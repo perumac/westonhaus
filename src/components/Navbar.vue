@@ -38,8 +38,6 @@
       </div>
       
       <div class="navbar-actions">
-        <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary btn-quote">Get a quote &rarr;</router-link>
-        
         <button class="mobile-toggle" @click="toggleMenu" aria-label="Toggle menu">
           <span class="hamburger" :class="{ 'open': mobileMenuOpen }"></span>
         </button>
