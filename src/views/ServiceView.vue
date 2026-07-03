@@ -17,12 +17,12 @@
       <div class="container">
         <div class="details-grid">
           <div class="details-text">
-            <h2>About this Service</h2>
+            <h2>{{ currentLang === 'en' ? 'About this Service' : 'Acerca de este Servicio' }}</h2>
             <p v-for="(paragraph, index) in serviceData.description" :key="index">
               {{ paragraph }}
             </p>
             
-            <h3>What's Included</h3>
+            <h3>{{ currentLang === 'en' ? "What's Included" : 'Qué Incluye' }}</h3>
             <ul class="features-list">
               <li v-for="(feature, index) in serviceData.features" :key="index">
                 <svg xmlns="http://www.w3.org/-2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -41,8 +41,8 @@
     <section class="gallery-section section-padding">
       <div class="container">
         <div class="section-header">
-          <h2>Previous Works</h2>
-          <p>Explore some of our recently completed {{ serviceData.title.toLowerCase() }} projects.</p>
+          <h2>{{ currentLang === 'en' ? 'Previous Works' : 'Trabajos Realizados' }}</h2>
+          <p>{{ currentLang === 'en' ? `Explore some of our recently completed ${serviceData.title.toLowerCase()} projects.` : `Explore algunos de nuestros proyectos recientes de ${serviceData.title.toLowerCase()}.` }}</p>
         </div>
         
         <div class="gallery-grid">
@@ -63,7 +63,7 @@
         <button class="lightbox-nav lightbox-prev" @click.stop="prevImage" aria-label="Previous image">&#10094;</button>
         <div class="lightbox-content">
           <img :src="serviceData.gallery[currentImageIndex]" :alt="serviceData.title + ' preview'" class="lightbox-img" />
-          <div class="lightbox-caption">{{ serviceData.title }} &mdash; Project {{ currentImageIndex + 1 }} of {{ serviceData.gallery.length }}</div>
+          <div class="lightbox-caption">{{ serviceData.title }} &mdash; {{ currentLang === 'en' ? 'Project' : 'Proyecto' }} {{ currentImageIndex + 1 }} {{ currentLang === 'en' ? 'of' : 'de' }} {{ serviceData.gallery.length }}</div>
         </div>
         <button class="lightbox-nav lightbox-next" @click.stop="nextImage" aria-label="Next image">&#10095;</button>
       </div>
@@ -75,8 +75,8 @@
   
   <div v-else class="not-found section-padding">
     <div class="container">
-      <h2>Service not found</h2>
-      <router-link to="/" class="btn btn-primary">Return to Home</router-link>
+      <h2>{{ currentLang === 'en' ? 'Service not found' : 'Servicio no encontrado' }}</h2>
+      <router-link to="/" class="btn btn-primary">{{ currentLang === 'en' ? 'Return to Home' : 'Volver al Inicio' }}</router-link>
     </div>
   </div>
 </template>
@@ -84,9 +84,11 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useLanguage } from '../composables/useLanguage';
 import ContactSection from '../components/ContactSection.vue';
 
 const route = useRoute();
+const { currentLang } = useLanguage();
 
 const lightboxOpen = ref(false);
 const currentImageIndex = ref(0);
@@ -114,7 +116,7 @@ const prevImage = () => {
   }
 };
 
-const servicesDB = {
+const servicesDB_en = {
   bathroom: {
     title: 'Bathroom Remodeling',
     subtitle: 'Transform your bathroom into a modern, comfortable, and functional luxury space.',
@@ -306,8 +308,201 @@ const servicesDB = {
   }
 };
 
+const servicesDB_es = {
+  bathroom: {
+    title: 'Remodelación de Baños',
+    subtitle: 'Transforme su baño en un espacio de lujo moderno, cómodo y perfectamente funcional.',
+    heroImage: '/images/hero_bathroom.png',
+    description: [
+      'Transforme su baño en un espacio moderno, cómodo y funcional. Nuestros servicios de remodelación incluyen renovación de duchas y tinas, gabinetes a medida, instalación de azulejos, pisos impermeables, iluminación ambiental, grifería de alta gama y renovaciones completas diseñadas para realzar la belleza y el valor de su hogar.',
+      'Llevamos la tranquilidad de un spa de lujo directamente a su residencia en Weston, utilizando iluminación inteligente, canceles de cristal templado sin marco y acabados en mármol radiante elaborados con cero tolerancia a imperfecciones.'
+    ],
+    features: [
+      'Duchas de Lujo tipo Spa y Renovación de Tinas',
+      'Gabinetes a Medida y Cubiertas de Cuarzo',
+      'Instalación Milimétrica de Porcelanato y Pisos Impermeables',
+      'Grifería de Diseño, Espejos e Iluminación Ambiental',
+      'Renovación Arquitectónica Completa Llave en Mano'
+    ],
+    gallery: [
+      '/images/gallery/gallery_bathroom_1.png',
+      '/images/gallery/gallery_bathroom_2.png',
+      '/images/hero_bathroom.png'
+    ]
+  },
+  kitchen: {
+    title: 'Renovación de Cocinas',
+    subtitle: 'Mejore la belleza, funcionalidad y valor de su cocina con acabados y diseño de alta gama.',
+    heroImage: '/images/hero_kitchen.png',
+    description: [
+      'Mejore la belleza, funcionalidad y valor de su cocina con renovaciones profesionales. Desde nuevos gabinetes y cubiertas hasta iluminación moderna, salpicaderos (backsplashes), pisos impermeables y accesorios de diseño, transformamos su cocina en un espacio elegante y eficiente para la vida diaria y el entretenimiento.',
+      'Como el corazón de su hogar, su cocina merece gabinetes a medida impecables, duraderas islas de piedra en formato cascada y electrodomésticos empotrados en acero inoxidable diseñados para experiencias culinarias excepcionales.'
+    ],
+    features: [
+      'Gabinetes Personalizados en Acabado Mate y Madera',
+      'Cubiertas Monumentales en Mármol, Cuarzo y Granito',
+      'Salpicaderos de Diseño y Pisos 100% Impermeables',
+      'Grifería de Alta Gama e Iluminación Inteligente',
+      'Distribución Optimizada para Entretenimiento Diario'
+    ],
+    gallery: [
+      '/images/gallery/gallery_kitchen_1.png',
+      '/images/gallery/gallery_kitchen_2.png',
+      '/images/hero_kitchen.png'
+    ]
+  },
+  roofing: {
+    title: 'Reparación de Techos',
+    subtitle: 'Proteja su hogar con servicios de techado confiables, duraderos y resistentes a huracanes.',
+    heroImage: '/images/hero_roofing.png',
+    description: [
+      'Proteja su hogar con servicios confiables de techado. Solucionamos filtraciones, reemplazamos tejas dañadas y restauramos desgaste general o daños por tormentas para devolverle a su techo máxima seguridad, durabilidad y rendimiento, evitando costosos daños futuros.',
+      'Nuestros equipos especializados en el sur de la Florida utilizan tejas arquitectónicas premium, paneles metálicos modernos y membranas impermeabilizantes avanzadas para garantizar completa seguridad estructural contra lluvias torrenciales y vientos huracanados.'
+    ],
+    features: [
+      'Detección y Sellado Integral de Filtraciones',
+      'Reemplazo de Tejas Arquitectónicas y Pizarra',
+      'Restauración por Daños de Tormentas y Cobertura de Emergencia',
+      'Subcapa Impermeabilizante de Alta Resistencia',
+      'Refuerzo Estructural de Canaletas, Fascia y Soffit'
+    ],
+    gallery: [
+      '/images/hero_roofing.png',
+      '/images/gallery/gallery_roofing_1.png',
+      '/images/gallery/gallery_roofing_2.png'
+    ]
+  },
+  painting: {
+    title: 'Pintura Residencial',
+    subtitle: 'Revitalice y embellezca su hogar con acabados profesionales en interiores y exteriores.',
+    heroImage: '/images/hero_painting.png',
+    description: [
+      'Revitalice su hogar con servicios profesionales de pintura interior y exterior. Logramos acabados sedosos, calidad duradera y resultados espectaculares que realzan la apariencia y el valor comercial de su propiedad.',
+      'Adaptados al intenso clima del sur de la Florida, aplicamos recubrimientos exteriores elastoméricos ultra-premium con filtro UV e imprimaciones interiores sin olor de baja emisión de VOC que mantienen su estética de lujo intacta por décadas.'
+    ],
+    features: [
+      'Acabados Impecables en Paredes Interiores, Techos y Molduras',
+      'Recubrimientos Elastoméricos Exteriores Resistentes al Clima',
+      'Asesoría Arquitectónica Profesional de Color',
+      'Pintura Fina con Pistola para Gabinetes y Carpintería',
+      'Preparación Meticulosa, Lijado y Enmascarado de Superficies'
+    ],
+    gallery: [
+      '/images/gallery/gallery_painting_1.png',
+      '/images/gallery/gallery_painting_2.png',
+      '/images/hero_painting.png'
+    ]
+  },
+  flooring: {
+    title: 'Pisos y Azulejos',
+    subtitle: 'Embellezca su hogar con instalación milimétrica de azulejos y pisos de ultra-lujo.',
+    heroImage: '/images/hero_flooring.png',
+    description: [
+      'Embellezca su hogar con soluciones de pisos y azulejos expertamente instalados. Ofrecemos acabados duraderos, elegantes y de la más alta calidad que mejoran la belleza, comodidad y plusvalía de cualquier espacio.',
+      'Desde subsuelos nivelados con láser hasta intrincados pisos de roble blanco tipo espina de pescado (herringbone) y porcelanato italiano de gran formato, nuestros artesanos garantizan simetría absoluta y confort acústico.'
+    ],
+    features: [
+      'Instalación de Mármol y Porcelanato de Gran Formato',
+      'Pisos de Roble Blanco de Lujo y Parquet Herringbone',
+      'Nivelación Láser de Subsuelo y Aislamiento Acústico',
+      'Rodapiés Personalizados y Molduras Decorativas',
+      'Sistemas Avanzados de Barrera contra Humedad'
+    ],
+    gallery: [
+      '/images/gallery/gallery_flooring_1.png',
+      '/images/gallery/gallery_flooring_2.png',
+      '/images/hero_flooring.png'
+    ]
+  },
+  drywall: {
+    title: 'Drywall y Sheetrock',
+    subtitle: 'Paredes y cielos rasos perfectamente lisos con instalación y reparación profesional.',
+    heroImage: '/images/gallery/gallery_drywall_2.png',
+    description: [
+      'Cree paredes y techos perfectamente lisos e impecables con nuestros servicios profesionales de instalación y reparación de drywall (sheetrock). Tanto para construcciones nuevas, remodelaciones o reparaciones, entregamos acabados limpios hechos para durar.',
+      'Eliminamos grietas, manchas por daños de agua y texturas irregulares mediante empastado espejo Nivel 5 (Skim Coating), dejando sus paredes listas para iluminación arquitectónica rasante.'
+    ],
+    features: [
+      'Instalación y Estructuración Precisa de Drywall',
+      'Acabado Espejo Nivel 5 (Skim Coat Plastering)',
+      'Reparación Invisible de Grietas y Daños por Agua',
+      'Arcos y Nichos Arquitectónicos Personalizados en Techos',
+      'Aislamiento Acústico y Ensambles Resistentes al Fuego'
+    ],
+    gallery: [
+      '/images/hero_drywall.png',
+      '/images/gallery/gallery_drywall_1.png',
+      '/images/gallery/gallery_drywall_2.png'
+    ]
+  },
+  courtyards: {
+    title: 'Terrazas y Patios',
+    subtitle: 'Transforme sus exteriores en oasis de entretenimiento con diseños arquitectónicos de lujo.',
+    heroImage: '/images/hero_courtyards.png',
+    description: [
+      'Transforme su espacio exterior con diseños de patios y terrazas hermosos y funcionales. Creamos áreas acogedoras que elevan el confort, mejoran el atractivo visual y aumentan el valor general de su propiedad.',
+      'Conectamos perfectamente sus áreas interiores y exteriores en Weston y Miami, integrando pisos de travertino, salas techadas bajo pérgolas, fogatas empotradas e iluminación nocturna atmosférica.'
+    ],
+    features: [
+      'Pisos Personalizados en Travertino y Piedra Natural',
+      'Pérgolas con Sombra y Terrazas Techadas de Lujo',
+      'Cocinas de Exterior y Fogatas (Fire Pits) Empotradas',
+      'Iluminación Nocturna Arquitectónica de Paisaje',
+      'Integración Continua entre Interiores y Exteriores'
+    ],
+    gallery: [
+      '/images/gallery/gallery_courtyards_1.png',
+      '/images/gallery/gallery_courtyards_2.png',
+      '/images/hero_courtyards.png'
+    ]
+  },
+  landscaping: {
+    title: 'Jardinería y Paisajismo',
+    subtitle: 'Realce sus exteriores con servicios profesionales de jardinería y paisajismo a medida.',
+    heroImage: '/images/hero_landscaping.png',
+    description: [
+      'Mejore sus espacios al aire libre con servicios profesionales de jardinería y paisajismo. Creamos entornos hermosos y funcionales que realzan la estética exterior y el valor de su residencia.',
+      'Desde follaje tropical selecto e instalación de palmeras exóticas hasta sistemas de riego inteligente automatizado y bordes de césped impecables, diseñamos santuarios naturales deslumbrantes alrededor de su hogar.'
+    ],
+    features: [
+      'Diseño Arquitectónico de Jardines Tropicales y Palmeras',
+      'Césped Natural Premium e Instalación de Putting Greens',
+      'Sistemas de Riego Inteligente y Drenaje Automatizado',
+      'Senderos en Piedra Natural y Mulch Decorativo',
+      'Mantenimiento Integral Estacional de Propiedades'
+    ],
+    gallery: [
+      '/images/gallery/gallery_landscaping_1.png',
+      '/images/gallery/gallery_landscaping_2.png',
+      '/images/hero_landscaping.png'
+    ]
+  },
+  other: {
+    title: 'Soluciones Integrales',
+    subtitle: 'Remodelaciones mecánicas licenciadas llave en mano: Plomería, Electricidad y Climatización HVAC.',
+    heroImage: '/images/hero_other.png',
+    description: [
+      'Como parte de nuestras soluciones integrales de remodelación, también ofrecemos servicios mecánicos de plomería, electricidad y aire acondicionado (HVAC). Nuestro trabajo es realizado por profesionales licenciados y calificados, garantizando seguridad y cumplimiento normativo en cada proyecto.',
+      'Ya sea cableando una cocina para domótica inteligente, actualizando tuberías para un baño spa principal u optimizando el flujo de aire HVAC para un enfriamiento silencioso, gestionamos cada disciplina técnica a la perfección.'
+    ],
+    features: [
+      'Plomería Residencial Licenciada, Reubicación y Grifería',
+      'Actualización de Paneles Eléctricos y Domótica Inteligente',
+      'Instalación de Aire Acondicionado Alta Eficiencia (HVAC)',
+      'Permisos, Cumplimiento de Códigos e Inspecciones Rigurosas',
+      'Ingeniería Mecánica Llave en Mano para Remodelaciones'
+    ],
+    gallery: [
+      '/images/gallery/gallery_other_1.png',
+      '/images/gallery/gallery_other_2.png',
+      '/images/hero_other.png'
+    ]
+  }
+};
+
 const serviceData = computed(() => {
-  return servicesDB[route.params.id];
+  const db = currentLang.value === 'es' ? servicesDB_es : servicesDB_en;
+  return db[route.params.id];
 });
 
 // Scroll to top when route changes
