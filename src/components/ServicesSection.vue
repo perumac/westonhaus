@@ -2,9 +2,9 @@
   <section id="services" class="services-section section-padding">
     <div class="container">
       <div class="section-header">
-        <span class="subheading">Our Expertise</span>
-        <h2 class="section-title">Comprehensive Home Remodeling Services</h2>
-        <p class="section-subtitle">Delivering exceptional quality, luxury design, and lasting value across Weston Miami.</p>
+        <span class="subheading">{{ currentLang === 'en' ? 'Our Expertise' : 'Nuestra Especialidad' }}</span>
+        <h2 class="section-title">{{ currentLang === 'en' ? 'Comprehensive Home Remodeling Services' : 'Servicios Integrales de Remodelación de Lujo' }}</h2>
+        <p class="section-subtitle">{{ currentLang === 'en' ? 'Delivering exceptional quality, luxury design, and lasting value across Weston Miami.' : 'Ofrecemos calidad excepcional, diseño de alta gama y valor duradero en Weston y Miami.' }}</p>
       </div>
       
       <div class="services-grid">
@@ -17,7 +17,7 @@
             <h3 class="card-title">{{ service.title }}</h3>
             <p class="card-desc">{{ service.description }}</p>
             <router-link :to="service.link" class="card-link">
-              Learn More 
+              {{ currentLang === 'en' ? 'Learn More' : 'Conocer Más' }} 
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </router-link>
           </div>
@@ -28,62 +28,127 @@
 </template>
 
 <script setup>
-const services = [
-  {
-    title: 'Bathroom Remodeling',
-    description: 'Transform your bathroom into a modern, comfortable, and functional space. Our bathroom remodeling services include shower and bathtub upgrades, custom vanities, tile installation, flooring, lighting, fixtures, and complete bathroom renovations designed to enhance both beauty and value in your home.',
-    image: '/images/hero_bathroom.png',
-    link: '/services/bathroom'
-  },
-  {
-    title: 'Kitchen Upgrades',
-    description: 'Enhance the beauty, functionality, and value of your kitchen with professional upgrades. From new cabinets and countertops to modern lighting, backsplashes, flooring, and fixtures, we help transform your kitchen into a stylish and efficient space for everyday living and entertaining.',
-    image: '/images/hero_kitchen.png',
-    link: '/services/kitchen'
-  },
-  {
-    title: 'Roofing Repairs',
-    description: 'Protect your home with reliable roofing repair services. We address leaks, damaged shingles, storm-related issues, and general roof wear to restore your roof\'s safety, durability, and performance while helping prevent costly future damage.',
-    image: '/images/hero_roofing.png',
-    link: '/services/roofing'
-  },
-  {
-    title: 'Painting',
-    description: 'Refresh and enhance your home with professional interior and exterior painting services. We deliver smooth finishes, lasting quality, and beautiful results that improve the appearance and value of your property.',
-    image: '/images/hero_painting.png',
-    link: '/services/painting'
-  },
-  {
-    title: 'Tiling and Flooring',
-    description: 'Enhance your home with expertly installed tile and flooring solutions. We offer durable, stylish, and high-quality finishes that improve the beauty, comfort, and value of any space.',
-    image: '/images/hero_flooring.png',
-    link: '/services/flooring'
-  },
-  {
-    title: 'Drywall',
-    description: 'Create smooth, flawless walls and ceilings with our professional drywall installation and repair services. Whether for new construction, renovations, or repairs, we deliver clean finishes built to last.',
-    image: '/images/gallery/gallery_drywall_2.png',
-    link: '/services/drywall'
-  },
-  {
-    title: 'Courtyards Design & Renovation',
-    description: 'Transform your outdoor living space with beautiful and functional courtyard designs. We create inviting areas that enhance comfort, boost curb appeal, and increase your property\'s overall value.',
-    image: '/images/hero_courtyards.png',
-    link: '/services/courtyards'
-  },
-  {
-    title: 'Gardening & Landscaping',
-    description: 'Enhance your outdoor spaces with professional gardening and landscaping services. We create beautiful, functional environments that improve your home\'s curb appeal and overall value.',
-    image: '/images/hero_landscaping.png',
-    link: '/services/landscaping'
-  },
-  {
-    title: 'Other Solutions',
-    description: 'As part of our comprehensive remodeling solutions, we also provide plumbing, electrical, and air conditioning (HVAC) services. Our work is performed by licensed and qualified professionals, ensuring safety, reliability, and compliance with industry standards throughout every project.',
-    image: '/images/hero_other.png',
-    link: '/services/other'
+import { computed } from 'vue';
+import { useLanguage } from '../composables/useLanguage';
+
+const { currentLang } = useLanguage();
+
+const services = computed(() => {
+  if (currentLang.value === 'es') {
+    return [
+      {
+        title: 'Remodelación de Baños',
+        description: 'Transforme su baño en un espacio moderno, cómodo y funcional. Incluye duchas de cristal sin marco, tinas exclusivas, gabinetes a medida, azulejos de mármol e iluminación ambiental.',
+        image: '/images/hero_bathroom.png',
+        link: '/services/bathroom'
+      },
+      {
+        title: 'Renovación de Cocinas',
+        description: 'Mejore la belleza y funcionalidad de su cocina con acabados profesionales. Gabinetes mate de diseño, islas monumentales en mármol tipo cascada y electrodomésticos empotrados de alta gama.',
+        image: '/images/hero_kitchen.png',
+        link: '/services/kitchen'
+      },
+      {
+        title: 'Reparación de Techos',
+        description: 'Proteja su residencia con servicios confiables de techado. Solucionamos filtraciones, reemplazamos tejas arquitectónicas y restauramos techos contra tormentas y huracanes.',
+        image: '/images/hero_roofing.png',
+        link: '/services/roofing'
+      },
+      {
+        title: 'Pintura Residencial',
+        description: 'Revitalice su hogar con acabados sedosos e impecables. Aplicamos recubrimientos exteriores elastoméricos con filtro UV e imprimaciones interiores sin olor de calidad superior.',
+        image: '/images/hero_painting.png',
+        link: '/services/painting'
+      },
+      {
+        title: 'Pisos y Azulejos',
+        description: 'Instalación milimétrica con nivelación láser. Porcelanato italiano de gran formato y finos pisos en roble blanco tipo espina de pescado (herringbone) con aislamiento acústico.',
+        image: '/images/hero_flooring.png',
+        link: '/services/flooring'
+      },
+      {
+        title: 'Drywall y Sheetrock',
+        description: 'Paredes y cielos rasos perfectamente lisos con empastado espejo Nivel 5 (Skim Coating). Reparación invisible de grietas y arcos decorativos listos para iluminación rasante.',
+        image: '/images/gallery/gallery_drywall_2.png',
+        link: '/services/drywall'
+      },
+      {
+        title: 'Terrazas y Patios',
+        description: 'Transforme sus exteriores en oasis de entretenimiento con pérgolas bioclimáticas con sombra, pisos de travertino, fogatas empotradas e iluminación nocturna.',
+        image: '/images/hero_courtyards.png',
+        link: '/services/courtyards'
+      },
+      {
+        title: 'Jardinería y Paisajismo',
+        description: 'Santuarios naturales privados con palmeras exóticas, césped natural premium, sistemas de riego automatizado inteligente y senderos decorativos.',
+        image: '/images/hero_landscaping.png',
+        link: '/services/landscaping'
+      },
+      {
+        title: 'Soluciones Integrales',
+        description: 'Remodelaciones mecánicas licenciadas llave en mano: plomería residencial, actualización de paneles eléctricos, domótica y sistemas eficientes de climatización HVAC.',
+        image: '/images/hero_other.png',
+        link: '/services/other'
+      }
+    ];
   }
-];
+  return [
+    {
+      title: 'Bathroom Remodeling',
+      description: 'Transform your bathroom into a modern, comfortable, and functional space. Our bathroom remodeling services include shower and bathtub upgrades, custom vanities, tile installation, flooring, lighting, fixtures, and complete bathroom renovations designed to enhance both beauty and value in your home.',
+      image: '/images/hero_bathroom.png',
+      link: '/services/bathroom'
+    },
+    {
+      title: 'Kitchen Upgrades',
+      description: 'Enhance the beauty, functionality, and value of your kitchen with professional upgrades. From new cabinets and countertops to modern lighting, backsplashes, flooring, and fixtures, we help transform your kitchen into a stylish and efficient space for everyday living and entertaining.',
+      image: '/images/hero_kitchen.png',
+      link: '/services/kitchen'
+    },
+    {
+      title: 'Roofing Repairs',
+      description: 'Protect your home with reliable roofing repair services. We address leaks, damaged shingles, storm-related issues, and general roof wear to restore your roof\'s safety, durability, and performance while helping prevent costly future damage.',
+      image: '/images/hero_roofing.png',
+      link: '/services/roofing'
+    },
+    {
+      title: 'Painting',
+      description: 'Refresh and enhance your home with professional interior and exterior painting services. We deliver smooth finishes, lasting quality, and beautiful results that improve the appearance and value of your property.',
+      image: '/images/hero_painting.png',
+      link: '/services/painting'
+    },
+    {
+      title: 'Tiling and Flooring',
+      description: 'Enhance your home with expertly installed tile and flooring solutions. We offer durable, stylish, and high-quality finishes that improve the beauty, comfort, and value of any space.',
+      image: '/images/hero_flooring.png',
+      link: '/services/flooring'
+    },
+    {
+      title: 'Drywall',
+      description: 'Create smooth, flawless walls and ceilings with our professional drywall installation and repair services. Whether for new construction, renovations, or repairs, we deliver clean finishes built to last.',
+      image: '/images/gallery/gallery_drywall_2.png',
+      link: '/services/drywall'
+    },
+    {
+      title: 'Courtyards Design & Renovation',
+      description: 'Transform your outdoor living space with beautiful and functional courtyard designs. We create inviting areas that enhance comfort, boost curb appeal, and increase your property\'s overall value.',
+      image: '/images/hero_courtyards.png',
+      link: '/services/courtyards'
+    },
+    {
+      title: 'Gardening & Landscaping',
+      description: 'Enhance your outdoor spaces with professional gardening and landscaping services. We create beautiful, functional environments that improve your home\'s curb appeal and overall value.',
+      image: '/images/hero_landscaping.png',
+      link: '/services/landscaping'
+    },
+    {
+      title: 'Other Solutions',
+      description: 'As part of our comprehensive remodeling solutions, we also provide plumbing, electrical, and air conditioning (HVAC) services. Our work is performed by licensed and qualified professionals, ensuring safety, reliability, and compliance with industry standards throughout every project.',
+      image: '/images/hero_other.png',
+      link: '/services/other'
+    }
+  ];
+});
 </script>
 
 <style scoped>

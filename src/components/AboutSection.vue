@@ -4,16 +4,12 @@
       <!-- Top Part: Mission & Reliability -->
       <div class="about-top-grid">
         <div class="about-text-col">
-          <span class="subheading">Reliability & Commitment</span>
-          <h2 class="section-title">Built on Trust, Crafted for Elegance</h2>
-          <p class="mission-text">
-            At <strong>Weston Haus LLC</strong>, we view every remodeling project as a monumental investment in your property and family lifestyle. We are dedicated to transforming homes with uncompromising craftsmanship, meticulous attention to detail, and concierge-level customer service.
-          </p>
-          <p class="mission-text">
-            By embedding safety, complete transparency, and structural efficiency into every phase of construction, our core philosophy is to deliver breathtaking architectural results while fiercely respecting your time, budget, and unique personal vision.
-          </p>
+          <span class="subheading">{{ currentLang === 'en' ? 'Reliability & Commitment' : 'Confiabilidad y Compromiso' }}</span>
+          <h2 class="section-title">{{ currentLang === 'en' ? 'Built on Trust, Crafted for Elegance' : 'Construidos en Confianza, Diseñados con Elegancia' }}</h2>
+          <p class="mission-text" v-html="t.about.p1"></p>
+          <p class="mission-text" v-html="t.about.p2"></p>
           <div class="cta-wrapper">
-            <a href="#contact" class="btn btn-primary">Schedule a Consultation &rarr;</a>
+            <a href="#contact" class="btn btn-primary">{{ currentLang === 'en' ? 'Schedule a Consultation →' : 'Agendar Consulta Privada →' }}</a>
           </div>
         </div>
 
@@ -22,7 +18,8 @@
             <img src="/images/about_team.png" alt="Weston Haus Remodeling Craftsmanship" class="main-about-img" />
             <div class="glass-badge">
               <span class="badge-num">100%</span>
-              <span class="badge-label">Client Satisfaction<br>Guaranteed</span>
+              <span class="badge-label" v-if="currentLang === 'en'">Client Satisfaction<br>Guaranteed</span>
+              <span class="badge-label" v-else>Satisfacción del<br>Cliente Garantizada</span>
             </div>
           </div>
         </div>
@@ -31,9 +28,9 @@
       <!-- Bottom Part: Why Choose Us Grid -->
       <div class="why-choose-us">
         <div class="section-header-center">
-          <span class="subheading">The Weston Haus Difference</span>
-          <h3 class="grid-main-title">Why Homeowners Choose Us</h3>
-          <p class="grid-subtitle">Delivering excellence across every dimension of home remodeling.</p>
+          <span class="subheading">{{ currentLang === 'en' ? 'The Weston Haus Difference' : 'Diferencia Weston Haus' }}</span>
+          <h3 class="grid-main-title">{{ currentLang === 'en' ? 'Why Homeowners Choose Us' : 'Por Qué Nos Eligen Los Propietarios' }}</h3>
+          <p class="grid-subtitle">{{ currentLang === 'en' ? 'Delivering excellence across every dimension of home remodeling.' : 'Brindamos excelencia y perfección en cada dimensión de su remodelación.' }}</p>
         </div>
 
         <div class="reasons-grid">
@@ -49,38 +46,81 @@
 </template>
 
 <script setup>
-const reasons = [
-  {
-    title: 'Safety First',
-    desc: 'We strictly adhere to professional construction protocols to maintain an immaculate, hazard-free environment for your family, property, and our specialized crew.',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`
-  },
-  {
-    title: 'On-Time Completion',
-    desc: 'Meticulous milestone planning and disciplined workflow execution engineered to honor agreed timelines and eliminate stressful disruptions to your daily life.',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
-  },
-  {
-    title: 'Budget-Conscious Solutions',
-    desc: 'Strategic value engineering that helps homeowners maximize their equity by providing practical, high-impact remodeling options without hidden costs.',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
-  },
-  {
-    title: 'Quality Craftsmanship',
-    desc: 'We take immense pride in delivering durable, magazine-grade finishes and structural installations that stand the test of time with enduring luxury.',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`
-  },
-  {
-    title: 'Professional Communication',
-    desc: 'Concierge-level transparency. Dedicated project managers keep you proactively informed with clear updates throughout the entire remodeling journey.',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
-  },
-  {
-    title: 'Increase Home Value',
-    desc: 'Our bespoke architectural remodeling and design solutions dramatically enhance both the everyday livability and top-tier market valuation of your property.',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`
+import { computed } from 'vue';
+import { useLanguage } from '../composables/useLanguage';
+import { translations } from '../data/translations';
+
+const { currentLang } = useLanguage();
+const t = computed(() => translations[currentLang.value]);
+
+const reasons = computed(() => {
+  if (currentLang.value === 'es') {
+    return [
+      {
+        title: 'Seguridad Ante Todo',
+        desc: 'Cumplimos rigurosamente con los protocolos de construcción para mantener un entorno limpio y seguro para su familia y propiedad.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`
+      },
+      {
+        title: 'Entrega Puntual',
+        desc: 'Planificación meticulosa de hitos y disciplina operativa diseñada para honrar los tiempos acordados sin demoras ni interrupciones.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
+      },
+      {
+        title: 'Soluciones Eficientes en Presupuesto',
+        desc: 'Ingeniería de valor estratégica que maximiza la inversión del propietario ofreciendo acabados de alto impacto sin costos ocultos.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+      },
+      {
+        title: 'Calidad Artesanal de Lujo',
+        desc: 'Nos enorgullece entregar acabados dignos de revista e instalaciones estructurales diseñadas para resistir el paso del tiempo.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`
+      },
+      {
+        title: 'Comunicación Profesional',
+        desc: 'Transparencia tipo concierge. Gerentes de proyecto dedicados lo mantienen informado proactivamente durante todo el proceso de remodelación.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
+      },
+      {
+        title: 'Aumento del Valor de Propiedad',
+        desc: 'Nuestras remodelaciones arquitectónicas a la medida elevan drásticamente la habitabilidad y la tasación comercial de su residencia.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`
+      }
+    ];
   }
-];
+  return [
+    {
+      title: 'Safety First',
+      desc: 'We strictly adhere to professional construction protocols to maintain an immaculate, hazard-free environment for your family, property, and our specialized crew.',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`
+    },
+    {
+      title: 'On-Time Completion',
+      desc: 'Meticulous milestone planning and disciplined workflow execution engineered to honor agreed timelines and eliminate stressful disruptions to your daily life.',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
+    },
+    {
+      title: 'Budget-Conscious Solutions',
+      desc: 'Strategic value engineering that helps homeowners maximize their equity by providing practical, high-impact remodeling options without hidden costs.',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+    },
+    {
+      title: 'Quality Craftsmanship',
+      desc: 'We take immense pride in delivering durable, magazine-grade finishes and structural installations that stand the test of time with enduring luxury.',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`
+    },
+    {
+      title: 'Professional Communication',
+      desc: 'Concierge-level transparency. Dedicated project managers keep you proactively informed with clear updates throughout the entire remodeling journey.',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
+    },
+    {
+      title: 'Increase Home Value',
+      desc: 'Our bespoke architectural remodeling and design solutions dramatically enhance both the everyday livability and top-tier market valuation of your property.',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`
+    }
+  ];
+});
 </script>
 
 <style scoped>

@@ -9,44 +9,44 @@
             <img src="/images/logo.png" alt="Weston Haus Remodeling Logo" class="logo-image" />
           </router-link>
           <p class="footer-desc">
-            Weston Haus LLC is South Florida's premier home remodeling and architectural design team. We transform residences with uncompromising craftsmanship, safety, and absolute transparency.
+            {{ t.footer.desc }}
           </p>
           
           <div class="license-badge">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>Licensed & Insured Remodeling Contractor</span>
+            <span>{{ t.footer.licensed }}</span>
           </div>
         </div>
         
         <!-- Col 2: Navigation -->
         <div class="footer-nav">
-          <h3 class="footer-heading">Navigation</h3>
+          <h3 class="footer-heading">{{ t.footer.navHeading }}</h3>
           <ul class="nav-links">
-            <li><router-link to="/">Home</router-link></li>
-            <li><a href="#about">About Our Company</a></li>
-            <li><a href="#services">Premium Services</a></li>
-            <li><a href="#contact">Request Consultation</a></li>
+            <li><router-link to="/">{{ t.navbar.home }}</router-link></li>
+            <li><a href="#about">{{ t.footer.links.about }}</a></li>
+            <li><a href="#services">{{ t.footer.links.services }}</a></li>
+            <li><a href="#contact">{{ t.footer.links.contact }}</a></li>
           </ul>
         </div>
         
         <!-- Col 3: Concierge Contact & Hours -->
         <div class="footer-contact">
-          <h3 class="footer-heading">Headquarters</h3>
+          <h3 class="footer-heading">{{ t.footer.headquarters }}</h3>
           <div class="contact-list">
             <div class="contact-item">
-              <span class="label">Location</span>
+              <span class="label">{{ t.footer.location }}</span>
               <a href="https://www.google.com/maps/search/?api=1&query=124+W+Bayridge+Dr,+Weston,+FL+33326" target="_blank" rel="noopener noreferrer" class="location-link">124 W Bayridge Dr<br>Weston, FL 33326</a>
             </div>
             
             <div class="contact-item">
-              <span class="label">Concierge Desk</span>
+              <span class="label">{{ t.footer.concierge }}</span>
               <a href="tel:+17542722120" class="highlight-link">+1 (754) 272 2120</a>
               <a href="mailto:info@westonhaus.com" class="sub-link">info@westonhaus.com</a>
             </div>
 
             <div class="contact-item">
-              <span class="label">Working Hours</span>
-              <p class="hours">Monday &ndash; Saturday: 8:00 AM &ndash; 6:00 PM</p>
+              <span class="label">{{ t.footer.hours }}</span>
+              <p class="hours">{{ t.footer.hoursVal }}</p>
             </div>
           </div>
         </div>
@@ -59,6 +59,15 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+import { computed } from 'vue';
+import { useLanguage } from '../composables/useLanguage';
+import { translations } from '../data/translations';
+
+const { currentLang } = useLanguage();
+const t = computed(() => translations[currentLang.value]);
+</script>
 
 <style scoped>
 .footer {

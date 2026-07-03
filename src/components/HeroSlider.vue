@@ -4,15 +4,15 @@
     <div class="hero-content">
       <div class="content-wrapper">
         <transition name="fade" mode="out-in">
-          <div :key="currentIndex" class="slide-text">
-            <h1 class="hero-title">{{ slides[currentIndex].title }}</h1>
-            <p class="hero-desc">{{ slides[currentIndex].description }}</p>
+          <div :key="currentIndex + currentLang" class="slide-text">
+            <h1 class="hero-title">{{ t.heroSlides[currentIndex].title }}</h1>
+            <p class="hero-desc">{{ t.heroSlides[currentIndex].description }}</p>
           </div>
         </transition>
         
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Get a quote &rarr;</a>
-          <a href="#services" class="btn btn-outline">Learn more</a>
+          <a href="#contact" class="btn btn-primary">{{ t.heroSlides[currentIndex].ctaPrimary }}</a>
+          <a href="#services" class="btn btn-outline">{{ t.heroSlides[currentIndex].ctaSecondary }}</a>
         </div>
         
         <div class="slider-controls">
@@ -51,7 +51,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useLanguage } from '../composables/useLanguage';
+import { translations } from '../data/translations';
+
+const { currentLang } = useLanguage();
+const t = computed(() => translations[currentLang.value]);
 
 const slides = [
   {

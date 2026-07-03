@@ -4,10 +4,10 @@
       <div class="contact-grid">
         <!-- Contact Info Col -->
         <div class="contact-info">
-          <span class="subheading">Get In Touch</span>
-          <h2 class="section-title">Ready to Start Your Remodeling Journey?</h2>
+          <span class="subheading">{{ t.contactSection.tag }}</span>
+          <h2 class="section-title">{{ t.contactSection.heading }}</h2>
           <p class="section-desc">
-            Reach out to our specialized team today for a free estimate. We bring transparent consultations, architectural precision, and luxury craftsmanship directly to your home.
+            {{ t.contactSection.subheading }}
           </p>
           
           <div class="contact-cards">
@@ -17,7 +17,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               </div>
               <div class="card-details">
-                <span class="detail-label">Call Us Directly</span>
+                <span class="detail-label">{{ t.contactSection.cards.phoneLabel }}</span>
                 <a href="tel:+17542722120" class="detail-value">+1 (754) 272 2120</a>
               </div>
             </div>
@@ -28,7 +28,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </div>
               <div class="card-details">
-                <span class="detail-label">Email Inquiries</span>
+                <span class="detail-label">{{ t.contactSection.cards.emailLabel }}</span>
                 <a href="mailto:info@westonhaus.com" class="detail-value">info@westonhaus.com</a>
               </div>
             </div>
@@ -39,7 +39,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <div class="card-details">
-                <span class="detail-label">Office & Headquarters</span>
+                <span class="detail-label">{{ t.contactSection.cards.addressLabel }}</span>
                 <span class="detail-value detail-value-text">124 W Bayridge Dr, Weston, FL 33326</span>
               </div>
             </a>
@@ -50,57 +50,57 @@
         <div class="contact-form-wrapper">
           <div class="form-glow-border">
             <form @submit.prevent="submitForm" class="contact-form">
-              <h3 class="form-heading">Request a Quote</h3>
-              <p class="form-subheading">Fill out the details below and we will connect with you instantly on WhatsApp.</p>
+              <h3 class="form-heading">{{ t.contactSection.form.heading }}</h3>
+              <p class="form-subheading">{{ t.contactSection.form.subheading }}</p>
 
               <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" v-model="form.name" required placeholder="John Doe">
+                <label for="name">{{ t.contactSection.form.nameLabel }}</label>
+                <input type="text" id="name" v-model="form.name" required :placeholder="t.contactSection.form.namePlaceholder">
               </div>
               
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input type="email" id="email" v-model="form.email" required placeholder="john@example.com">
+                  <label for="email">{{ t.contactSection.form.emailLabel }}</label>
+                  <input type="email" id="email" v-model="form.email" required :placeholder="t.contactSection.form.emailPlaceholder">
                 </div>
                 <div class="form-group">
-                  <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" v-model="form.phone" required placeholder="+1 (754) 000-0000">
+                  <label for="phone">{{ t.contactSection.form.phoneLabel }}</label>
+                  <input type="tel" id="phone" v-model="form.phone" required :placeholder="t.contactSection.form.phonePlaceholder">
                 </div>
               </div>
               
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="service">Service Type</label>
+                  <label for="service">{{ t.contactSection.form.serviceLabel }}</label>
                   <div class="select-wrapper">
                     <select id="service" v-model="form.service" required>
-                      <option value="" disabled selected>Select a service</option>
-                      <option value="Bathroom Remodeling">Bathroom Remodeling</option>
-                      <option value="Kitchen Upgrades">Kitchen Upgrades</option>
-                      <option value="Roofing Repairs">Roofing Repairs</option>
-                      <option value="Painting">Painting</option>
-                      <option value="Tiling and Flooring">Tiling and Flooring</option>
-                      <option value="Drywall">Drywall</option>
-                      <option value="Courtyards Design & Renovation">Courtyards Design & Renovation</option>
-                      <option value="Gardening and Landscaping">Gardening and Landscaping</option>
-                      <option value="Other Solutions">Other Solutions</option>
+                      <option value="" disabled selected>{{ t.contactSection.form.serviceSelect }}</option>
+                      <option value="Bathroom Remodeling">{{ t.navbar.servicesList.bathroom }}</option>
+                      <option value="Kitchen Upgrades">{{ t.navbar.servicesList.kitchen }}</option>
+                      <option value="Roofing Repairs">{{ t.navbar.servicesList.roofing }}</option>
+                      <option value="Painting">{{ t.navbar.servicesList.painting }}</option>
+                      <option value="Tiling and Flooring">{{ t.navbar.servicesList.flooring }}</option>
+                      <option value="Drywall">{{ t.navbar.servicesList.drywall }}</option>
+                      <option value="Courtyards Design & Renovation">{{ t.navbar.servicesList.courtyards }}</option>
+                      <option value="Gardening and Landscaping">{{ t.navbar.servicesList.landscaping }}</option>
+                      <option value="Other Solutions">{{ t.navbar.servicesList.other }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="zipcode">City / Zip Code</label>
+                  <label for="zipcode">{{ currentLang === 'en' ? 'City / Zip Code' : 'Ciudad / Código Postal' }}</label>
                   <input type="text" id="zipcode" v-model="form.zipcode" required placeholder="Weston, FL 33326">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="message">Project Description (Optional)</label>
-                <textarea id="message" v-model="form.message" rows="3" placeholder="Tell us about your remodeling timeline or ideas..."></textarea>
+                <label for="message">{{ t.contactSection.form.messageLabel }}</label>
+                <textarea id="message" v-model="form.message" rows="3" :placeholder="t.contactSection.form.messagePlaceholder"></textarea>
               </div>
               
               <button type="submit" class="btn-whatsapp-submit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/></svg>
-                <span>Enviar mensaje por WhatsApp</span>
+                <span>{{ t.contactSection.form.btnText }}</span>
               </button>
             </form>
           </div>
@@ -111,7 +111,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useLanguage } from '../composables/useLanguage';
+import { translations } from '../data/translations';
+
+const { currentLang } = useLanguage();
+const t = computed(() => translations[currentLang.value]);
 
 const form = ref({
   name: '',

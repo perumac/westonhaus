@@ -9,36 +9,46 @@
         </div>
         
         <nav class="navbar-links" :class="{ 'navbar-open': mobileMenuOpen }">
-          <router-link to="/" @click="closeMenu">Home</router-link>
-          <router-link :to="{ path: '/', hash: '#about' }" @click="closeMenu">About</router-link>
+          <router-link to="/" @click="closeMenu">{{ t.navbar.home }}</router-link>
+          <router-link :to="{ path: '/', hash: '#about' }" @click="closeMenu">{{ t.navbar.about }}</router-link>
           
           <!-- Services Dropdown -->
           <div class="dropdown" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
             <a href="#" class="dropdown-toggle" @click.prevent="toggleDropdown">
-              Services
+              {{ t.navbar.services }}
               <svg :class="{ 'rotated': dropdownOpen }" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </a>
             <transition name="dropdown-fade">
               <div class="dropdown-menu" v-show="dropdownOpen">
-                <router-link to="/services/bathroom" @click="closeMenu">Bathroom Remodeling</router-link>
-                <router-link to="/services/kitchen" @click="closeMenu">Kitchen Upgrades</router-link>
-                <router-link to="/services/roofing" @click="closeMenu">Roofing Repairs</router-link>
-                <router-link to="/services/painting" @click="closeMenu">Painting</router-link>
-                <router-link to="/services/flooring" @click="closeMenu">Tiling and Flooring</router-link>
-                <router-link to="/services/drywall" @click="closeMenu">Drywall</router-link>
-                <router-link to="/services/courtyards" @click="closeMenu">Courtyards Design & Renovation</router-link>
-                <router-link to="/services/landscaping" @click="closeMenu">Gardening and Landscaping</router-link>
-                <router-link to="/services/other" @click="closeMenu">Other Solutions</router-link>
+                <router-link to="/services/bathroom" @click="closeMenu">{{ t.navbar.servicesList.bathroom }}</router-link>
+                <router-link to="/services/kitchen" @click="closeMenu">{{ t.navbar.servicesList.kitchen }}</router-link>
+                <router-link to="/services/roofing" @click="closeMenu">{{ t.navbar.servicesList.roofing }}</router-link>
+                <router-link to="/services/painting" @click="closeMenu">{{ t.navbar.servicesList.painting }}</router-link>
+                <router-link to="/services/flooring" @click="closeMenu">{{ t.navbar.servicesList.flooring }}</router-link>
+                <router-link to="/services/drywall" @click="closeMenu">{{ t.navbar.servicesList.drywall }}</router-link>
+                <router-link to="/services/courtyards" @click="closeMenu">{{ t.navbar.servicesList.courtyards }}</router-link>
+                <router-link to="/services/landscaping" @click="closeMenu">{{ t.navbar.servicesList.landscaping }}</router-link>
+                <router-link to="/services/other" @click="closeMenu">{{ t.navbar.servicesList.other }}</router-link>
               </div>
             </transition>
           </div>
 
-          <router-link :to="{ path: '/', hash: '#contact' }" @click="closeMenu">Contact</router-link>
+          <router-link :to="{ path: '/', hash: '#contact' }" @click="closeMenu">{{ t.navbar.contact }}</router-link>
+          
+          <!-- Mobile Language Button inside menu -->
+          <button @click="toggleLanguage" class="lang-toggle-btn mobile-lang-btn">
+            <span v-if="currentLang === 'en'">🇪🇸 Español</span>
+            <span v-else>🇺🇸 English</span>
+          </button>
         </nav>
       </div>
       
       <div class="navbar-actions">
-        <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary btn-quote">Get a quote &rarr;</router-link>
+        <button @click="toggleLanguage" class="lang-toggle-btn desktop-lang-btn" :title="currentLang === 'en' ? 'Traducir al Español' : 'Translate to English'">
+          <span v-if="currentLang === 'en'">🇪🇸 ES</span>
+          <span v-else>🇺🇸 EN</span>
+        </button>
+        <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary btn-quote">{{ t.navbar.quote }} &rarr;</router-link>
         
         <button class="mobile-toggle" @click="toggleMenu" aria-label="Toggle menu">
           <span class="hamburger" :class="{ 'open': mobileMenuOpen }"></span>
@@ -49,7 +59,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useLanguage } from '../composables/useLanguage';
+import { translations } from '../data/translations';
+
+const { currentLang, toggleLanguage } = useLanguage();
+const t = computed(() => translations[currentLang.value]);
 
 const isScrolled = ref(false);
 const mobileMenuOpen = ref(false);
@@ -219,6 +234,36 @@ onUnmounted(() => {
   transform: translate(-50%, -10px);
 }
 
+.lang-toggle-btn {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: var(--color-text-light);
+  padding: 0.45rem 0.9rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.lang-toggle-btn:hover {
+  background: rgba(212, 175, 55, 0.25);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.25);
+}
+
+.mobile-lang-btn {
+  display: none;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+}
+
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -341,8 +386,13 @@ onUnmounted(() => {
     display: block;
   }
   
-  .btn-quote {
+  .btn-quote, .desktop-lang-btn {
     display: none;
+  }
+
+  .mobile-lang-btn {
+    display: flex;
+    justify-content: center;
   }
 
   .navbar {
