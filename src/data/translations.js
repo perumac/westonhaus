@@ -101,11 +101,22 @@ export const translations = {
     },
     footer: {
       desc: 'Premier luxury residential remodeling and custom construction services tailored for discerning homeowners in Weston and South Florida.',
+      licensed: 'Licensed & Insured Remodeling Contractor',
       navHeading: 'Navigation',
+      links: {
+        about: 'About Our Company',
+        services: 'Premium Services',
+        contact: 'Request Consultation'
+      },
+      headquarters: 'Headquarters',
       headquartersHeading: 'Headquarters',
+      location: 'Location',
       locationLabel: 'Location',
+      concierge: 'Concierge Desk',
       conciergeLabel: 'Concierge Desk',
+      hours: 'Working Hours',
       hoursLabel: 'Working Hours',
+      hoursVal: 'Monday – Saturday: 8:00 AM – 6:00 PM',
       hoursText: 'Monday – Saturday: 8:00 AM – 6:00 PM',
       rights: '© 2026 Weston Haus LLC. All rights reserved.'
     },
@@ -219,11 +230,22 @@ export const translations = {
     },
     footer: {
       desc: 'Servicios de remodelación residencial de lujo y construcción a la medida diseñados para propietarios exigentes en Weston y el Sur de Florida.',
+      licensed: 'Contratista de Remodelación Licenciado y Asegurado',
       navHeading: 'Navegación',
+      links: {
+        about: 'Sobre Nuestra Empresa',
+        services: 'Servicios Premium',
+        contact: 'Solicitar Consulta'
+      },
+      headquarters: 'Sede Principal',
       headquartersHeading: 'Sede Principal',
+      location: 'Ubicación',
       locationLabel: 'Ubicación',
+      concierge: 'Atención al Cliente',
       conciergeLabel: 'Atención al Cliente',
+      hours: 'Horario de Atención',
       hoursLabel: 'Horario de Atención',
+      hoursVal: 'Lunes a Sábado: 8:00 AM – 6:00 PM',
       hoursText: 'Lunes a Sábado: 8:00 AM – 6:00 PM',
       rights: '© 2026 Weston Haus LLC. Todos los derechos reservados.'
     },

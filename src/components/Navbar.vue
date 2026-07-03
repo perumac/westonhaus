@@ -37,16 +37,28 @@
           
           <!-- Mobile Language Button inside menu -->
           <button @click="toggleLanguage" class="lang-toggle-btn mobile-lang-btn">
-            <span v-if="currentLang === 'en'">🇪🇸 Español</span>
-            <span v-else>🇺🇸 English</span>
+            <span v-if="currentLang === 'en'" class="lang-content">
+              <svg class="flag-icon" width="22" height="16" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="15" rx="2" fill="#AA151B"/><rect y="3.75" width="20" height="7.5" fill="#F1BF00"/></svg>
+              <span>Español</span>
+            </span>
+            <span v-else class="lang-content">
+              <svg class="flag-icon" width="22" height="16" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="15" rx="2" fill="#B22234"/><path d="M0 1.66h20M0 5h20M0 8.33h20M0 11.66h20" stroke="#FFFFFF" stroke-width="1.66"/><path d="M0 0h9v8.33H0z" fill="#3C3B6E"/><circle cx="2.2" cy="2" r="0.6" fill="#FFF"/><circle cx="4.5" cy="2" r="0.6" fill="#FFF"/><circle cx="6.8" cy="2" r="0.6" fill="#FFF"/><circle cx="3.3" cy="4.1" r="0.6" fill="#FFF"/><circle cx="5.6" cy="4.1" r="0.6" fill="#FFF"/><circle cx="2.2" cy="6.2" r="0.6" fill="#FFF"/><circle cx="4.5" cy="6.2" r="0.6" fill="#FFF"/><circle cx="6.8" cy="6.2" r="0.6" fill="#FFF"/></svg>
+              <span>English</span>
+            </span>
           </button>
         </nav>
       </div>
       
       <div class="navbar-actions">
         <button @click="toggleLanguage" class="lang-toggle-btn desktop-lang-btn" :title="currentLang === 'en' ? 'Traducir al Español' : 'Translate to English'">
-          <span v-if="currentLang === 'en'">🇪🇸 ES</span>
-          <span v-else>🇺🇸 EN</span>
+          <span v-if="currentLang === 'en'" class="lang-content">
+            <svg class="flag-icon" width="20" height="14" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="15" rx="2" fill="#AA151B"/><rect y="3.75" width="20" height="7.5" fill="#F1BF00"/></svg>
+            <span>ES</span>
+          </span>
+          <span v-else class="lang-content">
+            <svg class="flag-icon" width="20" height="14" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="15" rx="2" fill="#B22234"/><path d="M0 1.66h20M0 5h20M0 8.33h20M0 11.66h20" stroke="#FFFFFF" stroke-width="1.66"/><path d="M0 0h9v8.33H0z" fill="#3C3B6E"/><circle cx="2.2" cy="2" r="0.6" fill="#FFF"/><circle cx="4.5" cy="2" r="0.6" fill="#FFF"/><circle cx="6.8" cy="2" r="0.6" fill="#FFF"/><circle cx="3.3" cy="4.1" r="0.6" fill="#FFF"/><circle cx="5.6" cy="4.1" r="0.6" fill="#FFF"/><circle cx="2.2" cy="6.2" r="0.6" fill="#FFF"/><circle cx="4.5" cy="6.2" r="0.6" fill="#FFF"/><circle cx="6.8" cy="6.2" r="0.6" fill="#FFF"/></svg>
+            <span>EN</span>
+          </span>
         </button>
         <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary btn-quote">{{ t.navbar.quote }} &rarr;</router-link>
         
@@ -246,8 +258,19 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.lang-content {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.flag-icon {
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
 .lang-toggle-btn:hover {
